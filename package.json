@@ -1,6 +1,6 @@
 {
   "name": "react-cards-carousel",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A simple card carousel with react",
   "main": "index.js",
   "repository": {
@@ -40,7 +40,6 @@
     "webpack-cli": "^3.2.1"
   },
   "dependencies": {
-    "dataart": "file:../../Websites/new",
     "react-icons": "^4.4.0",
     "react-transition-group": "^4.4.2"
   }
