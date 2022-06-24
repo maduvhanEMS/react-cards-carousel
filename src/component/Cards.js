@@ -1,40 +1,38 @@
-import React, { useState } from "react";
-import Card from "./Card";
+import React, { useState } from 'react';
+import Card from './Card';
+import { MdKeyboardArrowRight, MdKeyboardArrowLeft } from 'react-icons/md';
+import { CSSTransition } from 'react-transition-group';
+import Arrows from './Arrow';
 
-import { MdKeyboardArrowRight, MdKeyboardArrowLeft } from "react-icons/md";
-import { CSSTransition } from "react-transition-group";
-
-import Arrows from "./Arrow";
-import { data } from "./Data";
-
-function Cards({ data, startingIndex }) {
+function Cards(props) {
+  const { data, startingIndex } = props;
   const [activeIndex, setActiveIndex] = useState(startingIndex);
-  const [direction, setDirection] = useState("");
+  const [direction, setDirection] = useState('');
 
   const nextCard = () => {
     var newActiveIndex = activeIndex + 1;
-    setActiveIndex(newActiveIndex > data.length - 1 ? 0 : newActiveIndex);
-    setDirection("right");
+    setActiveIndex(newActiveIndex > props.data.length - 1 ? 0 : newActiveIndex);
+    setDirection('right');
   };
 
   const prevCard = () => {
     var newActiveIndex = activeIndex - 1;
     setActiveIndex(newActiveIndex < 0 ? data.length - 1 : newActiveIndex);
-    setDirection("left");
+    setDirection('left');
   };
 
   const determineClass = (levelIndex) => {
     if (levelIndex === 0) {
-      return "level0";
+      return 'level0';
     } else if (levelIndex === 1) {
-      return "level1";
+      return 'level1';
     } else if (levelIndex === -1) {
-      return "level-1";
+      return 'level-1';
     } else if (levelIndex === -2) {
-      return "level-2";
+      return 'level-2';
     }
 
-    return "level2";
+    return 'level2';
   };
 
   const generateCards = (activeIndex) => {
@@ -55,7 +53,7 @@ function Cards({ data, startingIndex }) {
             key={index}
             cardStyle={determineClass(activeIndex - i)}
             bodyStyle={
-              determineClass(activeIndex - i) === "level0" &&
+              determineClass(activeIndex - i) === 'level0' &&
               `trans-${direction}`
             }
           />
@@ -66,30 +64,25 @@ function Cards({ data, startingIndex }) {
   };
 
   return (
-    <div className="container">
-      <div className="container-header">
+    <div className='container'>
+      <div className='container-header'>
         What are you <span>hear to do</span>
       </div>
-      <div className="container-button">
+      <div className='container-button'>
         <Arrows
-          direction="left"
+          direction='left'
           icon={<MdKeyboardArrowLeft />}
           handleClick={prevCard}
         />
         <Arrows
-          direction="right"
+          direction='right'
           icon={<MdKeyboardArrowRight />}
           handleClick={nextCard}
         />
       </div>
-      <div className="cards-container">{generateCards(activeIndex)}</div>
+      <div className='cards-container'>{generateCards(activeIndex)}</div>
     </div>
   );
 }
 
 export default Cards;
-
-Cards.defaultProps = {
-  data: data,
-  startingIndex: 0,
-};
